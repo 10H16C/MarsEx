@@ -1,0 +1,22 @@
+[
+  {"input": "Microsoft sp", "expected_entity_id": "ms_sharepoint", "case_type": "abbreviation"},
+  {"input": "MS Defender for Endpoint", "expected_entity_id": "ms_defender_endpoint", "case_type": "abbreviation"},
+  {"input": "Defender for Endpoint", "expected_entity_id": "ms_defender_endpoint", "case_type": "unseen_variant"},
+  {"input": "EKS", "expected_entity_id": "aws_eks", "case_type": "abbreviation"},
+  {"input": "AWS EKS cluster", "expected_entity_id": "aws_eks", "case_type": "hard_negative"},
+  {"input": "Amazon Web Services cloud", "expected_entity_id": "aws", "case_type": "unseen_variant"},
+  {"input": "AWS GuardDuty service", "expected_entity_id": "aws_guardduty", "case_type": "unseen_variant"},
+  {"input": "Amazon Kubernetes", "expected_entity_id": "aws_eks", "case_type": "unseen_variant"},
+  {"input": "CrowdStrike", "expected_entity_id": "crowdstrike_falcon", "case_type": "vendor_as_product"},
+  {"input": "Falcon EDR", "expected_entity_id": "crowdstrike_falcon", "case_type": "unseen_variant"},
+  {"input": "QRadar SIEM", "expected_entity_id": "ibm_qradar", "case_type": "unseen_variant"},
+  {"input": "Google SecOps", "expected_entity_id": "google_secops", "case_type": "abbreviation"},
+  {"input": "Elastic EDR", "expected_entity_id": "elastic_security", "case_type": "unseen_variant"},
+  {"input": "Sentinel", "expected_entity_id": null, "case_type": "near_collision"},
+  {"input": "Splunk", "expected_entity_id": null, "case_type": "near_collision"},
+  {"input": "Kubernetes", "expected_entity_id": null, "case_type": "unknown"},
+  {"input": "Oracle Database", "expected_entity_id": null, "case_type": "unknown"},
+  {"input": "Fortinet FortiGate", "expected_entity_id": null, "case_type": "unknown"},
+  {"input": "Windows 11", "expected_entity_id": null, "case_type": "unknown"},
+  {"input": "Azure", "expected_entity_id": "azure", "case_type": "known_alias"}
+]

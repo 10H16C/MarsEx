@@ -1,0 +1,15 @@
+"""SQLite connection setup shared by the importer and the repository."""
+
+import sqlite3
+from importlib.resources import files
+from pathlib import Path
+
+_SCHEMA = files("entity_resolver.store").joinpath("schema.sql").read_text(encoding="utf-8")
+
+
+def connect(db_path: Path) -> sqlite3.Connection:
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    connection = sqlite3.connect(db_path)
+    connection.execute("PRAGMA foreign_keys = ON")
+    connection.executescript(_SCHEMA)
+    return connection

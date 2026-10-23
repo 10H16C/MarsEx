@@ -1,0 +1,177 @@
+[
+  {
+    "id": "aws",
+    "canonical_name": "Amazon Web Services",
+    "vendor": "Amazon Web Services",
+    "description": "Amazon's public cloud platform as a whole.",
+    "aliases": ["AWS", "AWS Cloud", "Amazon AWS"]
+  },
+  {
+    "id": "aws_eks",
+    "canonical_name": "AWS EKS",
+    "vendor": "Amazon Web Services",
+    "description": "Managed Kubernetes service on AWS.",
+    "aliases": ["Amazon EKS", "Amazon Elastic Kubernetes Service", "Elastic Kubernetes Service"]
+  },
+  {
+    "id": "aws_s3",
+    "canonical_name": "AWS S3",
+    "vendor": "Amazon Web Services",
+    "description": "Object storage service on AWS.",
+    "aliases": ["Amazon S3", "Amazon Simple Storage Service", "Simple Storage Service"]
+  },
+  {
+    "id": "aws_lambda",
+    "canonical_name": "AWS Lambda",
+    "vendor": "Amazon Web Services",
+    "description": "Serverless function compute service on AWS.",
+    "aliases": ["Amazon Lambda"]
+  },
+  {
+    "id": "aws_guardduty",
+    "canonical_name": "AWS GuardDuty",
+    "vendor": "Amazon Web Services",
+    "description": "Threat detection service for AWS accounts and workloads.",
+    "aliases": ["Amazon GuardDuty"]
+  },
+  {
+    "id": "azure",
+    "canonical_name": "Microsoft Azure",
+    "vendor": "Microsoft",
+    "description": "Microsoft's public cloud platform as a whole.",
+    "aliases": ["Azure", "Azure Cloud"]
+  },
+  {
+    "id": "ms_sentinel",
+    "canonical_name": "Microsoft Sentinel",
+    "vendor": "Microsoft",
+    "description": "Cloud-native SIEM and SOAR on Azure.",
+    "aliases": ["Azure Sentinel"]
+  },
+  {
+    "id": "ms_defender_endpoint",
+    "canonical_name": "Microsoft Defender for Endpoint",
+    "vendor": "Microsoft",
+    "description": "Microsoft's enterprise EDR platform.",
+    "aliases": ["MDE", "Microsoft Defender ATP", "Windows Defender ATP"]
+  },
+  {
+    "id": "ms_sharepoint",
+    "canonical_name": "Microsoft SharePoint",
+    "vendor": "Microsoft",
+    "description": "Document management and intranet collaboration platform.",
+    "aliases": ["SharePoint Online"]
+  },
+  {
+    "id": "ms_entra_id",
+    "canonical_name": "Microsoft Entra ID",
+    "vendor": "Microsoft",
+    "description": "Cloud identity and access management service.",
+    "aliases": ["Azure Active Directory", "Azure AD", "Entra ID"]
+  },
+  {
+    "id": "ms_exchange_server",
+    "canonical_name": "Microsoft Exchange Server",
+    "vendor": "Microsoft",
+    "description": "On-premises mail and calendaring server.",
+    "aliases": ["Exchange Server", "MS Exchange Server"]
+  },
+  {
+    "id": "s1_singularity",
+    "canonical_name": "SentinelOne Singularity",
+    "vendor": "SentinelOne",
+    "description": "SentinelOne's EDR and XDR platform.",
+    "aliases": ["SentinelOne", "Singularity XDR"]
+  },
+  {
+    "id": "crowdstrike_falcon",
+    "canonical_name": "CrowdStrike Falcon",
+    "vendor": "CrowdStrike",
+    "description": "CrowdStrike's EDR and endpoint protection platform.",
+    "aliases": ["Falcon Insight"]
+  },
+  {
+    "id": "splunk_enterprise",
+    "canonical_name": "Splunk Enterprise",
+    "vendor": "Splunk",
+    "description": "Log search, indexing, and analytics platform.",
+    "aliases": []
+  },
+  {
+    "id": "splunk_es",
+    "canonical_name": "Splunk Enterprise Security",
+    "vendor": "Splunk",
+    "description": "SIEM application built on Splunk Enterprise.",
+    "aliases": ["Splunk ES"]
+  },
+  {
+    "id": "elastic_security",
+    "canonical_name": "Elastic Security",
+    "vendor": "Elastic",
+    "description": "SIEM and endpoint security built on Elasticsearch.",
+    "aliases": ["Elastic SIEM"]
+  },
+  {
+    "id": "ibm_qradar",
+    "canonical_name": "IBM QRadar SIEM",
+    "vendor": "IBM",
+    "description": "IBM's security information and event management platform.",
+    "aliases": ["QRadar", "IBM QRadar"]
+  },
+  {
+    "id": "google_secops",
+    "canonical_name": "Google Security Operations",
+    "vendor": "Google",
+    "description": "Google's SIEM and SOAR platform, formerly Chronicle.",
+    "aliases": ["Chronicle", "Google Chronicle", "Chronicle SIEM"]
+  },
+  {
+    "id": "gcp",
+    "canonical_name": "Google Cloud Platform",
+    "vendor": "Google",
+    "description": "Google's public cloud platform as a whole.",
+    "aliases": ["GCP", "Google Cloud"]
+  },
+  {
+    "id": "gke",
+    "canonical_name": "Google Kubernetes Engine",
+    "vendor": "Google",
+    "description": "Managed Kubernetes service on Google Cloud.",
+    "aliases": ["GKE"]
+  },
+  {
+    "id": "okta_workforce",
+    "canonical_name": "Okta Workforce Identity",
+    "vendor": "Okta",
+    "description": "Single sign-on and identity management for employees.",
+    "aliases": ["Okta SSO"]
+  },
+  {
+    "id": "github_enterprise",
+    "canonical_name": "GitHub Enterprise",
+    "vendor": "GitHub",
+    "description": "Enterprise source hosting and collaboration platform.",
+    "aliases": ["GHE", "GitHub Enterprise Server"]
+  },
+  {
+    "id": "paloalto_cortex_xdr",
+    "canonical_name": "Palo Alto Networks Cortex XDR",
+    "vendor": "Palo Alto Networks",
+    "description": "Palo Alto Networks' XDR and endpoint protection platform.",
+    "aliases": ["Cortex XDR"]
+  },
+  {
+    "id": "sophos_intercept_x",
+    "canonical_name": "Sophos Intercept X",
+    "vendor": "Sophos",
+    "description": "Sophos endpoint protection and EDR product.",
+    "aliases": []
+  },
+  {
+    "id": "trendmicro_vision_one",
+    "canonical_name": "Trend Micro Vision One",
+    "vendor": "Trend Micro",
+    "description": "Trend Micro's XDR and attack surface management platform.",
+    "aliases": ["Trend Vision One"]
+  }
+]

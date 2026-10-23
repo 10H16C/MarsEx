@@ -1,0 +1,22 @@
+[
+  {"input": "MSFT SharePoint", "expected_entity_id": "ms_sharepoint", "case_type": "abbreviation"},
+  {"input": "SharePoint Server", "expected_entity_id": "ms_sharepoint", "case_type": "unseen_variant"},
+  {"input": "Entra", "expected_entity_id": "ms_entra_id", "case_type": "unseen_variant"},
+  {"input": "AAD", "expected_entity_id": "ms_entra_id", "case_type": "abbreviation"},
+  {"input": "S3 bucket", "expected_entity_id": "aws_s3", "case_type": "unseen_variant"},
+  {"input": "GuardDuty", "expected_entity_id": "aws_guardduty", "case_type": "unseen_variant"},
+  {"input": "Lambda function", "expected_entity_id": "aws_lambda", "case_type": "unseen_variant"},
+  {"input": "CS Falcon", "expected_entity_id": "crowdstrike_falcon", "case_type": "abbreviation"},
+  {"input": "SentinelOne EDR", "expected_entity_id": "s1_singularity", "case_type": "unseen_variant"},
+  {"input": "Microsoft Sentinel SIEM", "expected_entity_id": "ms_sentinel", "case_type": "near_collision"},
+  {"input": "Chronicle Security", "expected_entity_id": "google_secops", "case_type": "unseen_variant"},
+  {"input": "Cortex XDR agent", "expected_entity_id": "paloalto_cortex_xdr", "case_type": "unseen_variant"},
+  {"input": "Intercept X Advanced", "expected_entity_id": "sophos_intercept_x", "case_type": "unseen_variant"},
+  {"input": "Vision One", "expected_entity_id": "trendmicro_vision_one", "case_type": "unseen_variant"},
+  {"input": "Amazon Web Services EKS", "expected_entity_id": "aws_eks", "case_type": "hard_negative"},
+  {"input": "Exchange Online", "expected_entity_id": null, "case_type": "hard_negative"},
+  {"input": "Azure DevOps", "expected_entity_id": null, "case_type": "hard_negative"},
+  {"input": "Microsoft Teams", "expected_entity_id": null, "case_type": "unknown"},
+  {"input": "Jira", "expected_entity_id": null, "case_type": "unknown"},
+  {"input": "Cisco Talos", "expected_entity_id": null, "case_type": "unknown"}
+]
