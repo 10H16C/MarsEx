@@ -5,15 +5,15 @@ import time
 from collections.abc import Callable
 from pathlib import Path
 
-from entity_resolver.cache import BoundedTTLCache
 from entity_resolver.config import Settings
-from entity_resolver.fingerprint import fingerprint
-from entity_resolver.models import ResolverResult
+from entity_resolver.domain import ResolverResult
+from entity_resolver.knowledge_base.snapshot import load_snapshot
 from entity_resolver.resolver import CacheKey, Resolver, ResultCache
-from entity_resolver.retrieval.retriever import CandidateRetriever
-from entity_resolver.selection.anthropic_selector import AnthropicSelector
-from entity_resolver.selection.base import CandidateSelector
-from entity_resolver.store.repository import load_snapshot
+from entity_resolver.steps.cache import BoundedTTLCache
+from entity_resolver.steps.candidates.retriever import CandidateRetriever
+from entity_resolver.steps.llm.claude import AnthropicSelector
+from entity_resolver.steps.llm.selector import CandidateSelector
+from entity_resolver.versioning import fingerprint
 
 
 def build_resolver(

@@ -13,7 +13,7 @@ dependencies = ["anthropic>=2.2", "pydantic>=2.7"]
 dev = ["pytest>=8", "ruff>=0.6", "pyright>=1.1.380"]
 
 [project.scripts]
-entity-resolver = "entity_resolver.__main__:main"
+entity-resolver = "entity_resolver.tools.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/entity_resolver"]

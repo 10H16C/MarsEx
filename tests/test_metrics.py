@@ -1,11 +1,11 @@
 import pytest
 
 from entity_resolver.config import Settings
-from entity_resolver.evaluation.dataset import EvalRecord
-from entity_resolver.evaluation.metrics import summarize, threshold_point
-from entity_resolver.evaluation.runner import Observation
-from entity_resolver.models import Entity, MatchType, ResolverResult, Selection
+from entity_resolver.domain import Entity, MatchType, ResolverResult, Selection
 from entity_resolver.resolver import Resolution
+from entity_resolver.tools.evaluation.dataset import EvalRecord
+from entity_resolver.tools.evaluation.metrics import summarize, threshold_point
+from entity_resolver.tools.evaluation.runner import Observation
 
 _SHAREPOINT = Entity("sp", "Microsoft SharePoint", "Microsoft", "description", ())
 

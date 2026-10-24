@@ -7,10 +7,10 @@ from anthropic import Anthropic, AnthropicError, omit
 from pydantic import BaseModel
 
 from entity_resolver.config import Settings
+from entity_resolver.domain import Candidate, Selection
 from entity_resolver.errors import InvalidSelectionError, SelectorError
-from entity_resolver.fingerprint import fingerprint
-from entity_resolver.models import Candidate, Selection
-from entity_resolver.selection.prompt import REQUEST_FORMAT_VERSION, SYSTEM_PROMPT, render_request
+from entity_resolver.steps.llm.prompt import REQUEST_FORMAT_VERSION, SYSTEM_PROMPT, render_request
+from entity_resolver.versioning import fingerprint
 
 # Thinking is always on for this model family, so leave room beyond the small JSON answer.
 _MAX_TOKENS = 4096

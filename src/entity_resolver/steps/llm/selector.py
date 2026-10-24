@@ -3,7 +3,7 @@
 from collections.abc import Sequence
 from typing import Protocol
 
-from entity_resolver.models import Candidate, Selection
+from entity_resolver.domain import Candidate, Selection
 
 
 class CandidateSelector(Protocol):

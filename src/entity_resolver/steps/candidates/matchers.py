@@ -5,7 +5,7 @@ Both arguments are compacted text: normalized, with spaces removed.
 
 from typing import Protocol
 
-from entity_resolver.models import MatchKind
+from entity_resolver.domain import MatchKind
 
 
 class NameMatcher(Protocol):

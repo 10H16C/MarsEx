@@ -3,13 +3,13 @@
 from collections.abc import Sequence
 from dataclasses import dataclass
 
-from entity_resolver.cache import BoundedTTLCache
+from entity_resolver.domain import Candidate, Entity, MatchType, ResolverResult, Selection
 from entity_resolver.errors import InvalidSelectionError
-from entity_resolver.models import Candidate, Entity, MatchType, ResolverResult, Selection
-from entity_resolver.normalize import normalize
-from entity_resolver.retrieval.retriever import CandidateRetriever
-from entity_resolver.selection.base import CandidateSelector
-from entity_resolver.store.repository import KnowledgeSnapshot
+from entity_resolver.knowledge_base.snapshot import KnowledgeSnapshot
+from entity_resolver.steps.cache import BoundedTTLCache
+from entity_resolver.steps.candidates.retriever import CandidateRetriever
+from entity_resolver.steps.llm.selector import CandidateSelector
+from entity_resolver.steps.normalize import normalize
 
 type CacheKey = tuple[str, str]
 type ResultCache = BoundedTTLCache[CacheKey, ResolverResult]

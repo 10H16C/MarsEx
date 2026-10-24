@@ -5,8 +5,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from entity_resolver.config import Settings
-from entity_resolver.evaluation.runner import Observation
-from entity_resolver.models import MatchType
+from entity_resolver.domain import MatchType
+from entity_resolver.tools.evaluation.runner import Observation
 
 SWEEP_THRESHOLDS = tuple(step / 20 for step in range(21))
 

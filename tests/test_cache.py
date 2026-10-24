@@ -1,4 +1,4 @@
-from entity_resolver.cache import BoundedTTLCache
+from entity_resolver.steps.cache import BoundedTTLCache
 
 
 class FakeClock:

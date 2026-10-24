@@ -54,24 +54,35 @@ assumption, so the output is a scenario, not a forecast. Results are in [evaluat
 
 ## Layout
 
-| Path | Role |
-|---|---|
-| `src/entity_resolver/resolver.py` | Pipeline: normalize → exact alias → cache → candidates → LLM → threshold |
-| `src/entity_resolver/retrieval/` | Exact / substring / subsequence matchers (strategies) and ranking |
-| `src/entity_resolver/selection/` | `CandidateSelector` port, Claude adapter, prompt |
-| `src/entity_resolver/store/` | SQLite schema, transactional seed import, in-memory snapshot |
-| `src/entity_resolver/cache.py` | Byte-bounded LRU cache with expiry |
-| `src/entity_resolver/composition.py` | The single place components are wired; computes `pipeline_version` |
-| `src/entity_resolver/evaluation/` | Dataset loading, uncached runs, metrics |
-| `data/` | Seed catalog (25 cloud, EDR, SIEM, SaaS products) and dev/test sets |
+The package follows the resolution flow in [design.md](design.md):
+
+```
+src/entity_resolver/
+  resolver.py        the pipeline: normalize -> exact alias -> cache -> candidates -> LLM -> threshold
+  setup.py           build_resolver(): wires the components and computes pipeline_version
+  config.py          settings (K, threshold, cache limits, model)
+  domain.py          Entity, Candidate, Selection, ResolverResult
+  steps/
+    normalize.py     step 1: casefold and collapse whitespace
+    cache.py         step 3: byte-bounded LRU cache with expiry
+    candidates/      step 4: exact / substring / subsequence matchers and ranking
+    llm/             step 5: CandidateSelector interface, Claude adapter, prompt
+  knowledge_base/    SQLite schema, transactional seed import, in-memory snapshot
+  tools/
+    cli.py           the command line (import, resolve, evaluate, simulate-cache)
+    evaluation/      dataset loading, uncached runs, metrics
+    cache_simulation.py
+data/                seed catalog (25 cloud, EDR, SIEM, SaaS products) and dev/test sets
+```
 
 ## Production stubs
 
 Marked with `PRODUCTION:` comments:
 
-- per-stage metrics and token/stop-reason monitoring (`resolver.py`, `anthropic_selector.py`);
+- per-stage metrics and token/stop-reason monitoring (`resolver.py`, `steps/llm/claude.py`);
 - human review of unknown and low-score results, with alias promotion only after review (`resolver.py`);
-- scheduled offline evaluation against a frozen test set (`evaluation/runner.py`);
-- a shared cache instead of the in-process one (`cache.py`);
-- benchmarking the linear name scan at catalog scale (`retrieval/retriever.py`);
-- entity deprecation instead of rejecting removed IDs (`store/importer.py`).
+- scheduled offline evaluation against a frozen test set (`tools/evaluation/runner.py`);
+- a shared cache instead of the in-process one (`steps/cache.py`);
+- benchmarking the linear name scan at catalog scale (`steps/candidates/retriever.py`);
+- entity deprecation instead of rejecting removed IDs (`knowledge_base/importer.py`);
+- replaying real traffic instead of a synthetic stream (`tools/cache_simulation.py`).

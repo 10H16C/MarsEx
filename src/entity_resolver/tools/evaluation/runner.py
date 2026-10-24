@@ -4,8 +4,8 @@ import time
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 
-from entity_resolver.evaluation.dataset import EvalRecord
 from entity_resolver.resolver import Resolution, Resolver
+from entity_resolver.tools.evaluation.dataset import EvalRecord
 
 
 @dataclass(frozen=True, slots=True)

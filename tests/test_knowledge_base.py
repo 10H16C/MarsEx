@@ -4,8 +4,8 @@ from pathlib import Path
 import pytest
 
 from entity_resolver.errors import SeedValidationError
-from entity_resolver.store.importer import import_seed
-from entity_resolver.store.repository import load_snapshot
+from entity_resolver.knowledge_base.importer import import_seed
+from entity_resolver.knowledge_base.snapshot import load_snapshot
 from tests.conftest import SEED_PATH
 
 

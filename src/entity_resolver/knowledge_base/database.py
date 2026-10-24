@@ -1,10 +1,10 @@
-"""SQLite connection setup shared by the importer and the repository."""
+"""SQLite connection setup shared by the importer and the snapshot loader."""
 
 import sqlite3
 from importlib.resources import files
 from pathlib import Path
 
-_SCHEMA = files("entity_resolver.store").joinpath("schema.sql").read_text(encoding="utf-8")
+_SCHEMA = files("entity_resolver.knowledge_base").joinpath("schema.sql").read_text(encoding="utf-8")
 
 
 def connect(db_path: Path) -> sqlite3.Connection:

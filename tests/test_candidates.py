@@ -2,11 +2,11 @@ from pathlib import Path
 
 import pytest
 
-from entity_resolver.models import Entity, MatchKind
-from entity_resolver.normalize import normalize
-from entity_resolver.retrieval.matchers import SubsequenceMatcher, SubstringMatcher
-from entity_resolver.retrieval.retriever import CandidateRetriever
-from entity_resolver.store.repository import KnowledgeSnapshot, load_snapshot
+from entity_resolver.domain import Entity, MatchKind
+from entity_resolver.knowledge_base.snapshot import KnowledgeSnapshot, load_snapshot
+from entity_resolver.steps.candidates.matchers import SubsequenceMatcher, SubstringMatcher
+from entity_resolver.steps.candidates.retriever import CandidateRetriever
+from entity_resolver.steps.normalize import normalize
 
 
 def _candidate_ids(db_path: Path, name: str, top_k: int = 10) -> list[str]:

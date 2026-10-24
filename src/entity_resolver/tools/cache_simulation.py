@@ -12,10 +12,10 @@ from dataclasses import dataclass, replace
 from itertools import accumulate
 from pathlib import Path
 
-from entity_resolver.composition import build_resolver
 from entity_resolver.config import Settings
-from entity_resolver.models import Candidate, Selection
-from entity_resolver.store.repository import load_snapshot
+from entity_resolver.domain import Candidate, Selection
+from entity_resolver.knowledge_base.snapshot import load_snapshot
+from entity_resolver.setup import build_resolver
 
 _SECONDS_PER_DAY = 24 * 60 * 60
 

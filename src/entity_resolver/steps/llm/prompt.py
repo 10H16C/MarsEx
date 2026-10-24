@@ -3,7 +3,7 @@
 import json
 from collections.abc import Sequence
 
-from entity_resolver.models import Candidate
+from entity_resolver.domain import Candidate
 
 # Bump when render_request changes shape; SYSTEM_PROMPT is versioned by its text.
 REQUEST_FORMAT_VERSION = 1

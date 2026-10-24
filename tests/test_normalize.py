@@ -1,4 +1,4 @@
-from entity_resolver.normalize import compact, normalize
+from entity_resolver.steps.normalize import compact, normalize
 
 
 def test_normalize_casefolds_and_collapses_whitespace() -> None:

@@ -6,9 +6,9 @@ from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
 
-from entity_resolver.fingerprint import fingerprint
-from entity_resolver.models import Entity
-from entity_resolver.store.database import connect
+from entity_resolver.domain import Entity
+from entity_resolver.knowledge_base.database import connect
+from entity_resolver.versioning import fingerprint
 
 
 @dataclass(frozen=True, slots=True)

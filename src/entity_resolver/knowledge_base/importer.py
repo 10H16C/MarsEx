@@ -9,8 +9,8 @@ from typing import Annotated
 from pydantic import BaseModel, ConfigDict, StringConstraints, TypeAdapter
 
 from entity_resolver.errors import SeedValidationError
-from entity_resolver.normalize import normalize
-from entity_resolver.store.database import connect
+from entity_resolver.knowledge_base.database import connect
+from entity_resolver.steps.normalize import normalize
 
 type NonEmpty = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 

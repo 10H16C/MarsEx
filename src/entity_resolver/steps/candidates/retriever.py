@@ -2,10 +2,10 @@
 
 from collections.abc import Sequence
 
-from entity_resolver.models import Candidate, MatchKind
-from entity_resolver.normalize import compact
-from entity_resolver.retrieval.matchers import DEFAULT_MATCHERS, NameMatcher
-from entity_resolver.store.repository import KnowledgeSnapshot
+from entity_resolver.domain import Candidate, MatchKind
+from entity_resolver.knowledge_base.snapshot import KnowledgeSnapshot
+from entity_resolver.steps.candidates.matchers import DEFAULT_MATCHERS, NameMatcher
+from entity_resolver.steps.normalize import compact
 
 
 class CandidateRetriever:

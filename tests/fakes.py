@@ -3,8 +3,8 @@
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 
+from entity_resolver.domain import Candidate, Selection
 from entity_resolver.errors import ResolverError
-from entity_resolver.models import Candidate, Selection
 
 NO_MATCH = Selection(candidate_id=None, match_score=0.0)
 

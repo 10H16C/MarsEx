@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from entity_resolver.config import Settings
-from entity_resolver.evaluation.simulation import (
+from entity_resolver.tools.cache_simulation import (
     build_name_pool,
     request_stream,
     simulate,

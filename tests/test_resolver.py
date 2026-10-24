@@ -2,10 +2,10 @@ from pathlib import Path
 
 import pytest
 
-from entity_resolver.composition import build_resolver
+from entity_resolver.domain import MatchType, Selection, Status
 from entity_resolver.errors import InvalidSelectionError, SelectorError
-from entity_resolver.models import MatchType, Selection, Status
 from entity_resolver.resolver import Resolver
+from entity_resolver.setup import build_resolver
 from tests.fakes import FakeSelector
 
 

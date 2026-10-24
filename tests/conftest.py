@@ -2,10 +2,10 @@ from pathlib import Path
 
 import pytest
 
-from entity_resolver.composition import build_resolver
 from entity_resolver.config import Settings
+from entity_resolver.knowledge_base.importer import import_seed
 from entity_resolver.resolver import Resolver
-from entity_resolver.store.importer import import_seed
+from entity_resolver.setup import build_resolver
 from tests.fakes import FakeSelector
 
 SEED_PATH = Path(__file__).resolve().parents[1] / "data" / "seed.json"
