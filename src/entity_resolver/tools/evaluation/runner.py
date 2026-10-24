@@ -10,6 +10,8 @@ from entity_resolver.tools.evaluation.dataset import EvalRecord
 
 @dataclass(frozen=True, slots=True)
 class Observation:
+    """What happened for one record in one repeat."""
+
     record: EvalRecord
     resolution: Resolution
     latency_seconds: float

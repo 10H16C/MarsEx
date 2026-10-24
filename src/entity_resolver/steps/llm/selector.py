@@ -7,6 +7,8 @@ from entity_resolver.domain import Candidate, Selection
 
 
 class CandidateSelector(Protocol):
+    """Anything that can choose one candidate or none: Claude in production, a fake in tests."""
+
     @property
     def version(self) -> str:
         """Identifies model and prompt configuration; part of the pipeline version."""

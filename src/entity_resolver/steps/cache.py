@@ -16,6 +16,7 @@ class _Entry[V]:
 class BoundedTTLCache[K, V]:
     """LRU cache whose estimated total size never exceeds max_bytes.
 
+    size_of estimates an entry's size in bytes; clock returns the current time in seconds.
     Expired entries are dropped when read or when evicted for space.
     PRODUCTION: a shared cache (e.g. Redis with maxmemory + allkeys-lru) would replace this.
     """
@@ -35,6 +36,7 @@ class BoundedTTLCache[K, V]:
         self._total_bytes = 0
 
     def get(self, key: K) -> V | None:
+        """Return a live entry and mark it recently used, or None if missing or expired."""
         entry = self._entries.get(key)
         if entry is None:
             return None
@@ -45,6 +47,10 @@ class BoundedTTLCache[K, V]:
         return entry.value
 
     def put(self, key: K, value: V) -> None:
+        """Store an entry, evicting least recently used ones until the size limit holds.
+
+        An entry larger than the whole cache is not stored.
+        """
         size = self._size_of(key, value)
         if size > self._max_bytes:
             return

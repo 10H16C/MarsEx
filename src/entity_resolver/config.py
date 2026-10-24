@@ -8,6 +8,8 @@ type Effort = Literal["low", "medium", "high", "xhigh", "max"]
 
 @dataclass(frozen=True, slots=True)
 class Settings:
+    """Tunable resolver settings. Those that affect answers are part of the pipeline version."""
+
     # Placeholders until tuned on data/eval/dev.json; freeze them before running the test set.
     top_k: int = 10
     llm_score_threshold: float = 0.8

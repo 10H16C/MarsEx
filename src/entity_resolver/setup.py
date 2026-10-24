@@ -22,6 +22,11 @@ def build_resolver(
     selector: CandidateSelector | None = None,
     clock: Callable[[], float] = time.monotonic,
 ) -> Resolver:
+    """Load the knowledge base and wire a ready-to-use resolver.
+
+    The selector defaults to Claude; tests pass a fake. The clock drives cache expiry and is
+    replaced only by tests and the cache simulation.
+    """
     settings = settings or Settings()
     selector = selector or AnthropicSelector(settings)
     snapshot = load_snapshot(db_path)

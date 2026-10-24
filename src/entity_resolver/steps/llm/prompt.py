@@ -27,6 +27,7 @@ When candidate_id is null, set match_score to 0."""
 
 
 def render_request(query: str, candidates: Sequence[Candidate]) -> str:
+    """Render the input and candidates as the JSON user message, in rank order."""
     payload = {
         "input": query,
         "candidates": [

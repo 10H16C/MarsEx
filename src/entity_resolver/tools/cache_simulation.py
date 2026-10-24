@@ -28,9 +28,11 @@ class SimulatedClock:
         self._now = 0.0
 
     def tick(self) -> None:
+        """Advance time by one request."""
         self._now += self._seconds_per_request
 
     def __call__(self) -> float:
+        """Return the current simulated time in seconds."""
         return self._now
 
 
@@ -43,12 +45,15 @@ class CountingSelector:
         self.calls = 0
 
     def select(self, query: str, candidates: Sequence[Candidate]) -> Selection:
+        """Count the call and accept the top-ranked candidate."""
         self.calls += 1
         return Selection(candidates[0].entity.id, 1.0)
 
 
 @dataclass(frozen=True, slots=True)
 class CacheScenario:
+    """Results of one pass over the stream with one cache size."""
+
     cache_max_bytes: int
     cache_hit_rate: float
     llm_calls: int
@@ -60,6 +65,8 @@ class CacheScenario:
 
 @dataclass(frozen=True, slots=True)
 class SimulationReport:
+    """The simulated stream's parameters and one scenario per cache size."""
+
     requests: int
     distinct_names_requested: int
     skew: float
@@ -95,6 +102,10 @@ def simulate(
     requests_per_day: int,
     seed: int,
 ) -> SimulationReport:
+    """Replay one synthetic stream once per cache size and compare LLM calls and cost.
+
+    The first entry of cache_sizes is the baseline for daily savings.
+    """
     rng = random.Random(seed)
     pool = build_name_pool(sorted(load_snapshot(db_path).alias_index), unique_names, rng)
     stream = request_stream(pool, requests, skew, rng)

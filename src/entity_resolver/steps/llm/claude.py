@@ -18,11 +18,15 @@ _FALLBACK_BETA = "server-side-fallback-2026-07-01"
 
 
 class _LlmSelection(BaseModel):
+    """The JSON shape Claude must answer with (enforced by structured output)."""
+
     candidate_id: str | None
     match_score: float
 
 
 class AnthropicSelector:
+    """CandidateSelector backed by Claude, using structured output."""
+
     def __init__(self, settings: Settings) -> None:
         self._settings = settings
         self.version = fingerprint(
@@ -39,6 +43,11 @@ class AnthropicSelector:
         return Anthropic()
 
     def select(self, query: str, candidates: Sequence[Candidate]) -> Selection:
+        """Ask Claude to pick one candidate or none.
+
+        Raises SelectorError when the request fails and InvalidSelectionError when the answer
+        is missing or does not match the schema.
+        """
         settings = self._settings
         try:
             response = self._client.beta.messages.parse(

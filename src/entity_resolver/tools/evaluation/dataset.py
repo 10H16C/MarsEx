@@ -19,4 +19,5 @@ _DATASET = TypeAdapter(list[EvalRecord])
 
 
 def load_dataset(path: Path) -> list[EvalRecord]:
+    """Load and validate a JSON list of evaluation records."""
     return _DATASET.validate_json(path.read_bytes())

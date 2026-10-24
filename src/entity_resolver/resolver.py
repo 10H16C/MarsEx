@@ -26,6 +26,8 @@ class Resolution:
 
 
 class Resolver:
+    """Resolves technology names to canonical products. Build it with setup.build_resolver."""
+
     def __init__(
         self,
         snapshot: KnowledgeSnapshot,
@@ -43,9 +45,14 @@ class Resolver:
         self._pipeline_version = pipeline_version
 
     def resolve(self, name: str) -> ResolverResult:
+        """Resolve a raw name to a product, or return unknown.
+
+        Raises ResolverError subclasses when the LLM request fails or breaks the contract.
+        """
         return self.explain(name).result
 
     def explain(self, name: str) -> Resolution:
+        """Resolve a raw name and also return the candidates and LLM selection behind it."""
         # PRODUCTION: emit per-stage counters (exact, cache hit, no candidates, LLM) and latency.
         query = normalize(name)
         if not query:

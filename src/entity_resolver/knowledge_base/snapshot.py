@@ -13,13 +13,20 @@ from entity_resolver.versioning import fingerprint
 
 @dataclass(frozen=True, slots=True)
 class KnowledgeSnapshot:
+    """The whole knowledge base in memory; requests never query SQLite."""
+
     entities: Mapping[str, Entity]
     alias_index: Mapping[str, tuple[str, ...]]
     """Normalized alias -> entity IDs sharing it, sorted."""
     fingerprint: str
+    """Hash of all rows; part of the pipeline version."""
 
 
 def load_snapshot(db_path: Path) -> KnowledgeSnapshot:
+    """Read all entities and aliases from SQLite.
+
+    Raises FileNotFoundError if the database has not been imported yet.
+    """
     if not db_path.exists():
         raise FileNotFoundError(f"Knowledge base {db_path} not found; run the import command.")
     with closing(connect(db_path)) as connection:

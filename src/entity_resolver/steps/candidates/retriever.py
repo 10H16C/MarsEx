@@ -9,6 +9,8 @@ from entity_resolver.steps.normalize import compact
 
 
 class CandidateRetriever:
+    """Nominates products by matching the input against every stored name and alias."""
+
     def __init__(
         self,
         snapshot: KnowledgeSnapshot,

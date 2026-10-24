@@ -24,6 +24,7 @@ MEASURED_COST_PER_LLM_CALL = 0.0033
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Run one CLI command; return 0 on success and 1 on a reported error."""
     args = _parser().parse_args(argv)
     try:
         _COMMANDS[args.command](args)

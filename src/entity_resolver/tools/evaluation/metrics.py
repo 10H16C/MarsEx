@@ -13,6 +13,8 @@ SWEEP_THRESHOLDS = tuple(step / 20 for step in range(21))
 
 @dataclass(frozen=True, slots=True)
 class ThresholdPoint:
+    """Quality metrics at one acceptance threshold."""
+
     threshold: float
     precision: float
     recall: float
@@ -23,6 +25,8 @@ class ThresholdPoint:
 
 @dataclass(frozen=True, slots=True)
 class Report:
+    """Everything the evaluate command reports for one run."""
+
     pipeline_version: str
     observations: int
     at_configured_threshold: ThresholdPoint
@@ -47,6 +51,7 @@ def predicted_id(observation: Observation, threshold: float) -> str | None:
 
 
 def threshold_point(observations: Sequence[Observation], threshold: float) -> ThresholdPoint:
+    """Compute precision, recall, F1, and false acceptance as if run at this threshold."""
     true_pos = false_pos = false_neg = negatives = accepted_negatives = 0
     for observation in observations:
         expected = observation.record.expected_entity_id
@@ -80,6 +85,7 @@ def summarize(
     requests_per_day: int,
     cache_hit_rate: float,
 ) -> Report:
+    """Summarize a run: quality, threshold sweep, consistency, latency, and cost."""
     sweep = tuple(threshold_point(observations, t) for t in SWEEP_THRESHOLDS)
     eligible = [point for point in sweep if point.precision >= precision_target]
     llm_calls = [o.resolution.selection for o in observations if o.resolution.selection]

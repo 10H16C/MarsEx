@@ -16,6 +16,8 @@ type NonEmpty = Annotated[str, StringConstraints(strip_whitespace=True, min_leng
 
 
 class SeedEntity(BaseModel):
+    """One product record in seed JSON; blank strings are rejected."""
+
     model_config = ConfigDict(frozen=True, extra="forbid")
 
     id: NonEmpty
