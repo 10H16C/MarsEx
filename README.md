@@ -42,6 +42,16 @@ LLM-call rate, mean cost per call, and projected daily cost with and without cac
 Tune `top_k` and `llm_score_threshold` in `config.py` on the dev set, freeze them, then run
 `data/eval/test.json` once.
 
+Cache savings can be simulated for free (no LLM calls):
+
+```bash
+python -m entity_resolver simulate-cache --skew 1.0 --cache-sizes 0,100000,1000000,10000000
+```
+
+It replays a synthetic request stream whose repetition follows a Zipf distribution (`--skew`)
+and reports the cache hit rate, LLM calls, and daily cost per cache size. The skew is an
+assumption, so the output is a scenario, not a forecast. Results are in [evaluate.md](evaluate.md).
+
 ## Layout
 
 | Path | Role |

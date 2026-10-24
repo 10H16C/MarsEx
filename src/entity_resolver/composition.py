@@ -1,6 +1,8 @@
 """Composition root: the only place where resolver components are constructed."""
 
 import json
+import time
+from collections.abc import Callable
 from pathlib import Path
 
 from entity_resolver.cache import BoundedTTLCache
@@ -18,6 +20,7 @@ def build_resolver(
     db_path: Path,
     settings: Settings | None = None,
     selector: CandidateSelector | None = None,
+    clock: Callable[[], float] = time.monotonic,
 ) -> Resolver:
     settings = settings or Settings()
     selector = selector or AnthropicSelector(settings)
@@ -28,7 +31,7 @@ def build_resolver(
         snapshot.fingerprint, settings.top_k, settings.llm_score_threshold, selector.version
     )
     cache: ResultCache = BoundedTTLCache(
-        settings.cache_max_bytes, settings.cache_ttl_seconds, _entry_size
+        settings.cache_max_bytes, settings.cache_ttl_seconds, _entry_size, clock
     )
     return Resolver(
         snapshot=snapshot,
