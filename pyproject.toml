@@ -7,7 +7,7 @@ name = "entity-resolver"
 version = "0.1.0"
 description = "Technology entity disambiguation: exact aliases, name-matching candidates, LLM selection."
 requires-python = ">=3.12"
-dependencies = ["anthropic>=2.2", "pydantic>=2.7"]
+dependencies = ["anthropic>=2.2", "pydantic>=2.7", "python-dotenv>=1.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6", "pyright>=1.1.380"]

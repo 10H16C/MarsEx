@@ -1,12 +1,17 @@
-"""Command line: import the seed, resolve a name, evaluate a dataset, or simulate the cache."""
+"""Command line.
+
+With no command, starts an interactive session that resolves names one at a time.
+Commands: import the seed, resolve one name, evaluate a dataset, or simulate the cache.
+"""
 
 import argparse
 import json
 import sys
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from dataclasses import asdict
 from pathlib import Path
 
+from dotenv import load_dotenv
 from pydantic import ValidationError
 
 from entity_resolver.config import Settings
@@ -17,6 +22,7 @@ from entity_resolver.tools.cache_simulation import simulate
 from entity_resolver.tools.evaluation.dataset import load_dataset
 from entity_resolver.tools.evaluation.metrics import summarize
 from entity_resolver.tools.evaluation.runner import run
+from entity_resolver.tools.interactive import run_session
 
 DEFAULT_DB = Path("var/kb.sqlite")
 # Mean cost per Claude call measured on the dev set; see evaluate.md.
@@ -24,14 +30,31 @@ MEASURED_COST_PER_LLM_CALL = 0.0033
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Run one CLI command; return 0 on success and 1 on a reported error."""
+    """Run one CLI command, or the interactive session; return 0 on success, 1 on error."""
+    # Variables already set in the environment take precedence over .env.
+    load_dotenv()
     args = _parser().parse_args(argv)
     try:
-        _COMMANDS[args.command](args)
+        _COMMANDS[args.command or "interactive"](args)
     except (ResolverError, SeedValidationError, ValidationError, FileNotFoundError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
     return 0
+
+
+def _interactive(args: argparse.Namespace) -> None:
+    resolver = build_resolver(args.db)
+    print("Type a technology name to resolve it; 'exit' or Ctrl+C to quit.")
+    run_session(resolver, _prompted_lines(), print, MEASURED_COST_PER_LLM_CALL)
+
+
+def _prompted_lines() -> Iterator[str]:
+    while True:
+        try:
+            yield input("name> ")
+        except (EOFError, KeyboardInterrupt):
+            print()
+            return
 
 
 def _import(args: argparse.Namespace) -> None:
@@ -74,6 +97,7 @@ def _simulate_cache(args: argparse.Namespace) -> None:
 
 
 _COMMANDS: dict[str, Callable[[argparse.Namespace], None]] = {
+    "interactive": _interactive,
     "import": _import,
     "resolve": _resolve,
     "evaluate": _evaluate,
@@ -84,7 +108,7 @@ _COMMANDS: dict[str, Callable[[argparse.Namespace], None]] = {
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="entity-resolver")
     parser.add_argument("--db", type=Path, default=DEFAULT_DB, help="SQLite knowledge base")
-    commands = parser.add_subparsers(dest="command", required=True)
+    commands = parser.add_subparsers(dest="command")
 
     import_command = commands.add_parser("import", help="validate and import seed JSON")
     import_command.add_argument("seed", type=Path)

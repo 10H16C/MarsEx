@@ -22,12 +22,26 @@ python -m venv .venv
 .venv\Scripts\activate            # macOS/Linux: source .venv/bin/activate
 pip install -e ".[dev]"
 
-python -m entity_resolver import data/seed.json      # build var/kb.sqlite
-python -m entity_resolver resolve "AWS"              # exact alias: no API key needed
-python -m entity_resolver resolve "Microsoft sp"     # LLM path: needs ANTHROPIC_API_KEY or `ant auth login`
+python -m entity_resolver import data/seed.json      # build var/kb.sqlite (once)
+python -m entity_resolver                            # interactive session (main run)
+python -m entity_resolver resolve "AWS"              # resolve a single name
 
 pytest                                               # offline; uses a fake LLM
 ruff check . && pyright                              # lint and strict type check
+```
+
+Names that are not stored aliases go to Claude and need `ANTHROPIC_API_KEY` (or `ant auth login`).
+Copy `.env.example` to `.env` and fill in the key; it is loaded on startup and git-ignored.
+
+The interactive session keeps one resolver, so its cache is visible: each answer shows whether it
+came from an exact alias, the cache, or the LLM, and how long it took. On exit it prints how many
+LLM calls were made and roughly what the cache saved. Illustrative output (scores and times vary):
+
+```
+name> Microsoft sp
+  Microsoft SharePoint               llm: score 0.60                                 1,840.2 ms
+name> MICROSOFT  sp
+  Microsoft SharePoint               cache                                               0.0 ms
 ```
 
 Evaluation calls the LLM and costs money:
