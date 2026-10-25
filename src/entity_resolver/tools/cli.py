@@ -45,7 +45,6 @@ def main(argv: list[str] | None = None) -> int:
 def _interactive(args: argparse.Namespace) -> None:
     resolver = build_resolver(args.db)
     print("Type a technology name to resolve it; 'exit' or Ctrl+C to quit.")
-    print("Repeat a name (any casing or spacing) to see the cache answer it.\n")
     run_session(resolver, _prompted_lines(), print, MEASURED_COST_PER_LLM_CALL)
 
 
