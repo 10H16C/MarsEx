@@ -15,6 +15,7 @@ from entity_resolver.versioning import fingerprint
 # Thinking is always on for this model family, so leave room beyond the small JSON answer.
 _MAX_TOKENS = 4096
 _FALLBACK_BETA = "server-side-fallback-2026-07-01"
+_MISSING_CREDENTIALS = "Could not resolve authentication method"
 
 
 class _LlmSelection(BaseModel):
@@ -62,6 +63,13 @@ class AnthropicSelector:
             )
         except AnthropicError as error:
             raise SelectorError(f"LLM request failed: {error}") from error
+        except TypeError as error:
+            # The SDK reports missing credentials as a TypeError; any other TypeError is a bug.
+            if _MISSING_CREDENTIALS not in str(error):
+                raise
+            raise SelectorError(
+                "No Anthropic credentials: set ANTHROPIC_API_KEY or run `ant auth login`"
+            ) from error
         except ValueError as error:
             raise InvalidSelectionError(f"LLM output did not match the schema: {error}") from error
 
